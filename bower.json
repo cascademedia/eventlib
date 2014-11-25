@@ -1,0 +1,27 @@
+{
+  "name": "eventlib",
+  "version": "0.0.1",
+  "homepage": "https://github.com/cascademedia/eventlib",
+  "authors": [
+    "Estel Smith <estel.smith@gmail.com>"
+  ],
+  "description": "A PubSub system for JavaScript.",
+  "main": "src/eventlib.js",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "event",
+    "pubsub",
+    "observer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

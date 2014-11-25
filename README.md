@@ -41,7 +41,7 @@ var subscriber = function (data) {
 publisher.subscribe('my-topic', subscriber);
 ```
 
-Also, when you no longer have use for a subscriber, you may also remove it from the publisher itself.
+When you no longer have use for a subscriber, you may remove it from the publisher itself.
 ```javascript
 var subscriber = function (data) {
     console.log(data.value);
@@ -55,7 +55,7 @@ publisher.unsubscribe('my-topic', subscriber);
 ```
 
 ### Publishing Topics
-After configuring subscribers, you're ready to begin publishing your topics.
+After configuring subscribers, you're ready to begin publishing topics.
 
 When publishing, you can simply call ```publish(topicName)``` to publish the topic, but you can also pass arbitrary data
 to the subscribers by adding it as a second argument.
@@ -98,7 +98,7 @@ console.log('test 1');
  */
 
 // Synchronous
-publisher.publish('my-topic', null, false);
+publisher.publish('my-topic', null, false); // async=false will call all subscribers synchronously
 console.log('test 1');
 /*
  * Output:

@@ -31,26 +31,27 @@
             }
         },
         subscribe: function (topic, callback) {
-            var subscribers = this.subscribers;
+            var topicSubscribers = this.subscribers[topic];
 
-            if (subscribers[topic] === undefined) {
-                subscribers[topic] = [];
+            if (topicSubscribers === undefined) {
+                this.subscribers[topic] = [];
+                topicSubscribers = this.subscribers[topic];
             }
 
-            subscribers[topic].push(callback);
+            topicSubscribers.push(callback);
         },
         unsubscribe: function (topic, callback) {
             var result = false;
-            var subscribers = this.subscribers;
+            var topicSubscribers = this.subscribers[topic];
             var index;
 
-            if (subscribers[topic] !== undefined) {
-                index = subscribers[topic].indexOf(callback);
+            if (topicSubscribers !== undefined) {
+                index = topicSubscribers.indexOf(callback);
                 if (index !== -1) {
-                    subscribers[topic].splice(index, 1);
+                    topicSubscribers.splice(index, 1);
 
-                    if (subscribers[topic].length === 0) {
-                        delete subscribers[topic];
+                    if (topicSubscribers.length === 0) {
+                        delete this.subscribers[topic];
                     }
 
                     result = true;

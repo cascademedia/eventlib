@@ -3,9 +3,8 @@ eventlib
 
 Installation
 ------------
-There are two ways you can install eventlib.
-
-The easiest, and recommended, way of doing this is to install the package [through Bower](http://bower.io/).
+There are two ways you can install eventlib. The easiest, and recommended, way of doing this is to install the
+package [through Bower](http://bower.io/).
 
 Just create a bower.json file in your project:
 ```json
@@ -29,7 +28,22 @@ TODO
 
 Module Loaders
 --------------
-TODO
+The eventlib library registers itself in one of two ways, automatically.
+
+First, it will register itself to window.Publisher when running in a browser, allowing you access to the library if
+you don't have any module loaders defined. This is particularly useful when using the library along with plain
+javascript.
+
+Secondly, the library will register itself if it finds an AMD loader present, such as [RequireJS](http://requirejs.org/).
+It will register itself under the name ```eventlib```, allowing you to require the library and use it without any additional
+work.
+
+Example:
+```javascript
+var publisher = require('eventlib');
+
+publisher.subscribe('my-topic', function () {});
+```
 
 Contributing
 ------------
@@ -37,7 +51,10 @@ TODO
 
 Testing
 -------
-TODO
+All testing is covered by [Jasmine](https://jasmine.github.io/) 2.1.
+
+To run tests, clone the repository and run ```bower install```. After bower finishes installing Jasmine, you can then
+run the test suite by opening ```test/suite.html``` in the browser you wish to run tests.
 
 License
 -------

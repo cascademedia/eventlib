@@ -7,6 +7,9 @@
     ],
     "description": "A PubSub system for JavaScript.",
     "main": "src/eventlib.js",
+    "devDependencies": {
+        "jasmine": "2.1.2"
+    },
     "moduleType": [
         "amd",
         "globals"

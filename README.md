@@ -97,8 +97,8 @@ console.log('test 1');
  * test 2
  */
 
-// Synchronous
-publisher.publish('my-topic', null, false); // async=false will call all subscribers synchronously
+// Synchronous: passing false will call all subscribers synchronously
+publisher.publish('my-topic', null, false);
 console.log('test 1');
 /*
  * Output:

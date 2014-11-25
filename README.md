@@ -32,7 +32,27 @@ var publisher = require('eventlib'); // Referencing the AMD module
 ```
 
 ### Adding/Removing Subscribers
-TODO
+Once the publisher has been created, you can begin attaching subscribers to it.
+```javascript
+var callback = function (data) {
+    console.log(data.value);
+};
+
+publisher.subscribe('my-topic', callback);
+```
+
+Also, when you no longer have use for a subscriber, you may also remove it from the publisher itself.
+```javascript
+var callback = function (data) {
+    console.log(data.value);
+};
+
+publisher.subscribe('my-topic', callback);
+
+// [...]
+
+publisher.unsubscribe('my-topic', callback);
+```
 
 ### Publishing Topics
 TODO

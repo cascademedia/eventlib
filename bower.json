@@ -5,7 +5,7 @@
     "authors": [
         "Estel Smith <estel.smith@gmail.com>"
     ],
-    "description": "A PubSub system for JavaScript.",
+    "description": "A simple event system for JavaScript.",
     "main": "src/eventlib.js",
     "devDependencies": {
         "jasmine": "2.1.2"

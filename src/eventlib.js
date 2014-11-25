@@ -42,10 +42,12 @@
         unsubscribe: function (topic, callback) {
             var result = false;
             var subscribers = this.subscribers;
+            var index;
 
             if (subscribers[topic] !== undefined) {
-                if (subscribers[topic].indexOf(callback) !== -1) {
-                    delete subscribers[topic];
+                index = subscribers[topic].indexOf(callback);
+                if (index !== -1) {
+                    subscribers[topic].splice(index, 1);
                     result = true;
                 }
             }

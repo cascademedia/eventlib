@@ -48,6 +48,11 @@
                 index = subscribers[topic].indexOf(callback);
                 if (index !== -1) {
                     subscribers[topic].splice(index, 1);
+
+                    if (subscribers[topic].length === 0) {
+                        delete subscribers[topic];
+                    }
+
                     result = true;
                 }
             }

@@ -67,4 +67,13 @@ describe('Unsubscribe from topics', function () {
         expect(instance.subscribers['new_topic'][0]).toBe(callback1);
         expect(instance.subscribers['new_topic'][1]).toBe(callback3);
     });
+
+    it('topic is deleted when no more subscribers exist', function () {
+        var callback = function () {};
+
+        instance.subscribe('topic_delete', callback);
+
+        expect(instance.unsubscribe('topic_delete', callback)).toBe(true);
+        expect(instance.subscribers['topic_delete']).toBeUndefined();
+    });
 });

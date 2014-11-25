@@ -55,7 +55,38 @@ publisher.unsubscribe('my-topic', callback);
 ```
 
 ### Publishing Topics
-TODO
+After configuring subscribers, you're ready to begin publishing your topics.
+
+There are two ways to publish topics: synchronously, and asynchronously. Synchronous publishes will call the subscriber
+callbacks immediately before moving forward in the code, while asynchronous publishes will push the subscribers into
+JavaScript's event loop. The default mode is asynchronous, but can be overridden by passing a third argument
+(```async```) to publish.
+
+```javascript
+var callback = function () {
+    console.log('test 2');
+};
+
+publisher.subscribe('my-topic', callback);
+
+// Asynchronous
+publisher.publish('my-topic');
+console.log('test 1');
+/*
+ * Output:
+ * test 1
+ * test 2
+ */
+
+// Synchronous
+publisher.publish('my-topic', null, false);
+console.log('test 1');
+/*
+ * Output:
+ * test 2
+ * test 1
+ */
+```
 
 ## Module Loaders
 The eventlib library registers itself in one of two ways, automatically.

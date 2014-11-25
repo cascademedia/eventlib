@@ -77,3 +77,97 @@ describe('Unsubscribe from topics', function () {
         expect(instance.subscribers['topic_delete']).toBeUndefined();
     });
 });
+
+describe('Publish topics', function () {
+    var instance = new Publisher();
+
+    describe('synchronous publishing', function () {
+        it('can publish topic with a single subscriber', function () {
+            var value = false;
+            var callback = function () {
+                value = true;
+            };
+
+            instance.subscribe('sync_single_topic', callback);
+            instance.publish('sync_single_topic', undefined, false);
+
+            expect(value).toBe(true);
+        });
+
+        it('can publish topic with multiple subscribers', function () {
+            var value1 = false;
+            var value2 = false;
+
+            var callback1 = function () {
+                value1 = true;
+            };
+
+            var callback2 = function () {
+                value2 = true;
+            };
+
+            instance.subscribe('sync_multiple_topic', callback1);
+            instance.subscribe('sync_multiple_topic', callback2);
+            instance.publish('sync_multiple_topic', undefined, false);
+
+            expect(value1).toBe(true);
+            expect(value2).toBe(true);
+        });
+    });
+
+    describe('asynchronous publishing', function () {
+        var value1 = true;
+        var value2 = true;
+
+        it('can publish topic with a single subscriber', function (done) {
+            value1 = false;
+            var callback = function () {
+                value1 = true;
+                done();
+            };
+
+            instance.subscribe('async_single_topic', callback);
+            instance.publish('async_single_topic');
+        });
+
+        it('can publish topic with multiple subscribers', function (done) {
+            value1 = false;
+            value2 = false;
+
+            var callback1 = function () {
+                value1 = true;
+            };
+
+            var callback2 = function () {
+                value2 = true;
+                done();
+            };
+
+            instance.subscribe('async_multiple_topic', callback1);
+            instance.subscribe('async_multiple_topic', callback2);
+            instance.publish('async_multiple_topic');
+        });
+
+        afterEach(function () {
+            expect(value1).toBe(true);
+            expect(value2).toBe(true);
+        });
+    });
+
+    describe('common', function () {
+        it('publisher can pass data to subscriber', function () {
+            var value = false;
+            var callback = function (data) {
+                if (data !== undefined) {
+                    value = data.value;
+                }
+            };
+
+            instance.subscribe('data_test', callback);
+
+            instance.publish('data_test', {value: true}, false);
+
+            expect(value).toBe(true);
+        });
+    });
+});

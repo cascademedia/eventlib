@@ -34,28 +34,47 @@ var publisher = require('eventlib'); // Referencing the AMD module
 ### Adding/Removing Subscribers
 Once the publisher has been created, you can begin attaching subscribers to it.
 ```javascript
-var callback = function (data) {
+var subscriber = function (data) {
     console.log(data.value);
 };
 
-publisher.subscribe('my-topic', callback);
+publisher.subscribe('my-topic', subscriber);
 ```
 
 Also, when you no longer have use for a subscriber, you may also remove it from the publisher itself.
 ```javascript
-var callback = function (data) {
+var subscriber = function (data) {
     console.log(data.value);
 };
 
-publisher.subscribe('my-topic', callback);
+publisher.subscribe('my-topic', subscriber);
 
 // [...]
 
-publisher.unsubscribe('my-topic', callback);
+publisher.unsubscribe('my-topic', subscriber);
 ```
 
 ### Publishing Topics
 After configuring subscribers, you're ready to begin publishing your topics.
+
+When publishing, you can simply call ```publish(topicName)``` to publish the topic, but you can also pass arbitrary data
+to the subscribers by adding it as a second argument.
+```javascript
+var subscriber = function (data) {
+    console.log('Subscriber says ' + data.greeting + '!');
+};
+
+publisher.subscribe('my-topic', subscriber);
+
+publisher.publish('my-topic', {
+    greeting: 'hello'
+});
+
+/*
+ * Output:
+ * Subscriber says hello!
+ */
+```
 
 There are two ways to publish topics: synchronously, and asynchronously. Synchronous publishes will call the subscriber
 callbacks immediately before moving forward in the code, while asynchronous publishes will push the subscribers into
